@@ -1,8 +1,13 @@
 const request = require("request");
+const fs = require('fs')
+
+dataBuffer = fs.readFileSync('confidential.json')
+dataJSON = dataBuffer.toString()
+data = JSON.parse(dataJSON)
 
 const forecast = (city, callback) => {
 
-const url = "http://api.openweathermap.org/data/2.5/weather?q=" + decodeURIComponent(city) + "&APPID=aeb0f9d93984a8a3a87c0825529919b9&units=metric"
+const url = "http://api.openweathermap.org/data/2.5/weather?q=" + decodeURIComponent(city) + "&APPID="+data.openweathermap_api_key+"&units=metric"
 request({url, json:true }, (error, {body} = {}) => {
 
     if(error) {
